@@ -52,17 +52,17 @@ for k in np.arange(0, epochs):
     # Batch processing of the data
     for i in np.arange(0, n):
         x_i = x[i]  # retrieve i-th training samples
-        d_i = y[i]  # retrieve i-th actual prediction value
+        y_i = y[i]  # retrieve i-th actual prediction value
 
         s_j = np.dot(theta, np.transpose(x_i))  # sum of weights at neuron j,
                                                 # which is also the output node
-        y_j = sigmoid(s_j)  # prediction value made at neuron j
+        a_j = sigmoid(s_j)  # prediction value made at neuron j
 
         # Delta is the error signal at neuron j
-        delta_j = (d_i - y_j) * sigmoid(s_j) * (1 - sigmoid(s_j))
+        delta_j = (y_i - a_j) * a_j * (1 - a_j)
 
         # Accumulate error values
-        e = e + np.square(d_i - y_j)  # square error
+        e = e + np.square(y_i - a_j)  # square error
 
         # Adjust weights
         theta = theta + eta * delta_j * x_i  # w = w + Δw
