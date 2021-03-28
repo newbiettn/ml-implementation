@@ -33,12 +33,12 @@ print("y:\n", y)
 
 # Init values
 eta = 0.5  # learning rate eta
-theta = np.matrix([[0.1, 0.1, 0.1], [0.1, 0.1, 0.1]])  # weights
-theta_1 = np.matrix([[0.1, 0.1, 0.1],
-                     [0.1, 0.1, 0.1],
-                     [0.1, 0.1, 0.1]])  # weights between input and hidden nodes
-theta_2 = np.matrix([[0.1, 0.1, 0.1]])  # weights between hidden and output nodes
-print("w:\n", theta)
+theta_1 = np.matrix([[1, 1, 1],
+                     [1, 1, 1],
+                     [1, 1, 0]])  # weights between input and hidden nodes
+theta_2 = np.matrix([[1, 1, 1]])  # weights between hidden and output nodes
+print("W1:\n", theta_1)
+print("W2:\n", theta_2)
 
 
 # Define sigmoid function
@@ -70,12 +70,17 @@ for k in np.arange(0, epochs):
         e = e + np.square(d_i - a_2)  # update squared error
 
         # Backpropagation
+        # Error signal at the OUTPUT node j: δj = ej * φ′(sj) = (dj − yj) * φ′(sj)
         delta_2 = (d_i - a_2) * a_2 * (1 - a_2)
-        delta_1 = np.multiply(np.multiply(delta_2, theta_2), np.transpose(np.multiply(a_1,
-                                                                                     (1 - a_1))))
 
-        theta_1 = theta_1 + eta * np.multiply(delta_1, x_i)  # update weights
-        theta_2 = theta_2 + eta * np.transpose(np.multiply(delta_2, a_1))
+        # Error signal at the HIDDEN node j: δj = φ′(sj) * sum(δk ·wkj)
+        delta_1 = np.multiply(np.dot(delta_2, theta_2),
+                              np.transpose(np.multiply(a_1,1 - a_1))
+                              )
+
+        # Update weights ∆wji = η * δj * yi.
+        theta_1 = theta_1 + eta * np.dot(np.transpose(delta_1), x_i)
+        theta_2 = theta_2 + eta * np.transpose(np.dot(a_1, delta_2))
 
     # Mean squared error
     e = (1 / n) * e
