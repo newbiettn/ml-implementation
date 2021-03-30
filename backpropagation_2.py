@@ -31,12 +31,9 @@ y = np.matrix(data[['y']])
 print("x:\n", x)
 print("y:\n", y)
 
-# Init values
-eta = 0.5  # learning rate eta
-theta_1 = np.matrix([[1, 1, 1],
-                     [1, 1, 1],
-                     [1, 1, 0]])  # weights between input and hidden nodes
-theta_2 = np.matrix([[1, 1, 1]])  # weights between hidden and output nodes
+# Neural weights
+theta_1 = np.random.normal(loc=1, scale=1, size=(3, 3))  # weights between input and hidden nodes
+theta_2 = np.random.normal(loc=1, scale=1, size=(1, 3))  # weights between hidden and output nodes
 print("W1:\n", theta_1)
 print("W2:\n", theta_2)
 
@@ -48,6 +45,7 @@ def sigmoid(z):
 
 
 # Backpropagation
+eta = 0.1  # learning rate eta
 epochs = 5000  # number of training epochs
 n = len(data)  # number of data points
 log = pd.DataFrame(columns=['Epoch', 'Error'])
