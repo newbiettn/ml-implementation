@@ -101,13 +101,14 @@ def train(data, vocab_size, hidden_size):
             u = np.dot(W2.T, h)
             y_pred = softmax(u)
 
+            # Backpropagation
             e = [y_pred - label for label in y]
             dW2 = np.outer(h, np.sum(e, axis=0))
             dW1 = np.outer(x, np.dot(W2, np.sum(e, axis=0)))
 
+            # Update weights
             W1 = W1 - eta * dW1
             W2 = W2 - eta * dW2
-
     return W1, W2
 
 
