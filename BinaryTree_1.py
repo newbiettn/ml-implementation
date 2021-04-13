@@ -40,6 +40,10 @@ class Node:
         self._lnode = lnode
 
     def traverse(self):
+        """
+        Traverse all sub-nodes
+        :return: a representation of the tree in the Newick format.
+        """
         s = ""
         print(s)
         if self._lnode is not None:
@@ -52,10 +56,6 @@ class Node:
             s = "(" + s
         s = s + self._name
         return s
-
-    def visualize(self):
-        print(self.name)
-
 
 class BinaryTree:
     """
