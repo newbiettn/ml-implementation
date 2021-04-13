@@ -18,7 +18,7 @@ class Node:
     """
 
     def __init__(self,
-                 name,
+                 name="",
                  category=None,
                  data=None,
                  gini=None,
@@ -57,6 +57,7 @@ class Node:
         s = s + self._name
         return s
 
+
 class BinaryTree:
     """
     Represent binary tree objects
@@ -74,6 +75,15 @@ class BinaryTree:
         See http://etetoolkit.org/docs/latest/tutorial/tutorial_trees.html
         """
         return self._root.traverse() + ";"
+
+    def visualize(self):
+        """
+        Visualise the tree in ASCII format
+        :return:
+        """
+        s = self.traverse()
+        t = Tree(s, format=1)
+        print(t.get_ascii(attributes=["name", "label", "complex"]))
 
 
 # Test
@@ -101,8 +111,4 @@ b11_node._rnode = b112_node
 
 # Define tree
 tree = BinaryTree(root=root)
-
-# Visualise tree in ASCII
-s = tree.traverse()
-t = Tree(s, format=1)
-print(t.get_ascii(attributes=["name", "label", "complex"]))
+tree.visualize()
