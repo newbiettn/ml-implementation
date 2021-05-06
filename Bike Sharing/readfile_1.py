@@ -1,3 +1,9 @@
+################################################################################
+# readfile_1.py
+# AUTHOR:           NGOC TRAN
+# CREATED:          07 May 2021
+# DESCRIPTION:      Stream data from CSV file using built-in utilities.
+################################################################################
 import csv
 import os
 
