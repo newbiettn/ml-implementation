@@ -9,3 +9,6 @@ venv.bak/
 
 # IDEA
 .idea/
+
+# Data
+datasets/
